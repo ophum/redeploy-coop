@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  coop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./config.yaml:/config.yaml
+    command: agent
+    restart: always
