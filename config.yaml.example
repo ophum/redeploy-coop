@@ -1,0 +1,8 @@
+name: username
+password: password
+pollingSeconds: 5
+scoreServerURL: http://localhost:3000
+redeploymentApiServerAddress: localhost
+redeploymentApiServerPort: 8090
+group: group1
+penaltyMinutes: 10
