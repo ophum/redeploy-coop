@@ -6,3 +6,4 @@ redeploymentApiServerAddress: localhost
 redeploymentApiServerPort: 8090
 group: group1
 penaltyMinutes: 10
+sentryDsn: ""

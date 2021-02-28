@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/getsentry/sentry-go"
 	rdApi "github.com/ophum/humstack-redeployment/pkg/api"
 	rdClient "github.com/ophum/humstack-redeployment/pkg/client"
 	"github.com/ophum/humstack/pkg/api/meta"
@@ -36,6 +37,7 @@ func NewCoopAgent(config *Config) (*CoopAgent, error) {
 func (a *CoopAgent) Run() {
 	// first sync
 	if err := a.sync(); err != nil {
+		sentry.CaptureException(err)
 		log.Println(err.Error())
 	} else {
 		log.Printf("sync done! `%s`", a.lastSync.Format(time.RFC3339Nano))
@@ -49,6 +51,7 @@ func (a *CoopAgent) Run() {
 		select {
 		case <-ticker.C:
 			if err := a.sync(); err != nil {
+				sentry.CaptureException(err)
 				log.Println(err.Error())
 			} else {
 				log.Printf("sync done! `%s`", a.lastSync.Format(time.RFC3339Nano))
